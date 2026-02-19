@@ -1,0 +1,572 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+  <title>Julabo Korea — Temperature Control & Reactor Solutions</title>
+  <meta name="description" content="줄라보 코리아(주) — 항온 순환 수조, 칠러, 워터배스, 반응기 솔루션. 빠르게 찾고 비교하세요." />
+  <meta name="author" content="JULABO Korea Inc." />
+
+  <!-- Open Graph / Twitter for rich sharing -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Julabo Korea — Temperature Control & Reactor Solutions" />
+  <meta property="og:description" content="항온 순환 수조부터 반응기까지, 필요한 제품을 빠르게 찾고 비교하세요." />
+  <meta property="og:image" content="https://www.julabokorea.com/img/logo.png" />
+  <meta property="og:url" content="https://www.julabokorea.com" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="icon" href="img/favicon.ico" />
+
+  <style>
+    :root{
+      --bg:#0b0e11; /* dark base */
+      --card:#11151a;
+      --text:#e7eef5;
+      --muted:#9fb0c3;
+      --brand:#008995;
+      --brand-2:#00c2d0;
+      --ok:#17c964;
+      --danger:#f31260;
+      --radius:18px;
+      --container:1200px;
+    }
+    @media (prefers-color-scheme: light){
+      :root{--bg:#f7fbff;--card:#ffffff;--text:#0b0e11;--muted:#4c5b6a}
+      body{background:var(--bg)}
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;color:var(--text);background:var(--bg);font:400 16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Noto Sans KR, Apple SD Gothic Neo, sans-serif}
+    a{color:var(--brand)}
+    .container{max-width:var(--container);margin-inline:auto;padding:0 20px}
+    .nav{position:sticky;top:0;z-index:40;background:rgba(11,14,17,.75);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.06)}
+    .nav-inner{display:flex;align-items:center;gap:16px;padding:12px 0}
+    .brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+    .brand img{height:36px}
+    .brand span{font-weight:700;letter-spacing:.2px}
+    .nav-links{margin-left:auto;display:flex;gap:18px}
+    .nav-links a{color:var(--muted);text-decoration:none}
+    .nav-links a:hover{color:var(--text)}
+
+    /* hero */
+    .hero{position:relative;overflow:hidden}
+    .hero-wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:24px;align-items:center;padding:48px 0}
+    .hero h1{font-weight:800;line-height:1.15;margin:0 0 12px;font-size:clamp(28px,4.5vw,54px)}
+    .hero p{color:var(--muted);margin:0 0 20px}
+    .actions{display:flex;gap:12px;flex-wrap:wrap}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 16px;border-radius:14px;border:1px solid transparent;text-decoration:none;cursor:pointer}
+    .btn-primary{background:linear-gradient(135deg,var(--brand),var(--brand-2));color:white}
+    .btn-ghost{border-color:rgba(255,255,255,.15);color:var(--text);background:transparent}
+    .hero img{width:100%;border-radius:var(--radius);box-shadow:0 20px 60px rgba(0,0,0,.35)}
+
+    /* chips */
+    .chips{display:flex;flex-wrap:wrap;gap:8px}
+    .chip{padding:8px 12px;border-radius:999px;background:#0f1419;border:1px solid rgba(255,255,255,.08);color:var(--muted);cursor:pointer}
+    .chip[aria-pressed="true"], .chip.active{background:linear-gradient(135deg,var(--brand),var(--brand-2));color:white;border-color:transparent}
+
+    /* finder */
+    .finder{margin-top:32px;background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:var(--radius);padding:14px}
+    .finder .row{display:flex;gap:12px;flex-wrap:wrap}
+    .finder input[type="search"]{flex:1;min-width:220px;padding:12px 14px;border-radius:12px;border:1px solid rgba(255,255,255,.14);background:#0f1419;color:var(--text)}
+
+    /* grid */
+    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
+    .col-3{grid-column:span 12}
+    @media (min-width:640px){.col-3{grid-column:span 6}}
+    @media (min-width:1024px){.col-3{grid-column:span 3}}
+
+    .card{background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;transition:transform .15s ease, box-shadow .15s ease}
+    .card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,.35)}
+    .card img{aspect-ratio:4/3;object-fit:cover}
+    .card .body{padding:14px}
+    .card h3{margin:0 0 8px;font-size:18px}
+    .meta{color:var(--muted);font-size:14px}
+    .tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+    .tag{font-size:12px;padding:4px 8px;border-radius:999px;background:#0f1419;border:1px solid rgba(255,255,255,.08);color:var(--muted)}
+    .card .foot{display:flex;gap:8px;margin-top:auto;padding:14px}
+    .btn-link{flex:1;justify-content:center;border-color:rgba(255,255,255,.14)}
+    .btn-compare{background:#0f1419;border:1px dashed rgba(255,255,255,.18);color:var(--muted)}
+
+    /* reveal on scroll */
+    .reveal{opacity:0;transform:translateY(10px);transition:opacity .5s ease, transform .5s ease}
+    .reveal.in{opacity:1;transform:none}
+
+    /* brand strip */
+    .brands{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .brands a{display:block;background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:14px}
+    .brands img{height:28px;margin-inline:auto;display:block}
+
+    /* compare tray */
+    .tray{position:fixed;inset:auto 12px 12px 12px;z-index:50;display:none}
+    .tray-inner{display:flex;justify-content:space-between;align-items:center;gap:12px;background:#0f1419;border:1px solid rgba(255,255,255,.15);border-radius:14px;padding:10px 12px}
+    .tray .chips{gap:6px}
+    .pill{background:var(--card);border:1px solid rgba(255,255,255,.12);padding:6px 10px;border-radius:999px}
+
+    /* modal */
+    .overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);opacity:0;pointer-events:none;transition:opacity .2s ease;z-index:60}
+    .overlay.open{opacity:1;pointer-events:auto}
+    .modal{position:fixed;inset:50% auto auto 50%;transform:translate(-50%,-46%);z-index:61;width:min(980px,92vw);background:var(--card);border:1px solid rgba(255,255,255,.18);border-radius:16px;box-shadow:0 30px 80px rgba(0,0,0,.45);opacity:0;pointer-events:none;transition:opacity .2s ease, transform .2s ease}
+    .modal.open{opacity:1;pointer-events:auto;transform:translate(-50%,-50%)}
+    .modal header{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.1)}
+    .modal .content{padding:16px}
+    .table{width:100%;border-collapse:collapse}
+    .table th,.table td{border-bottom:1px solid rgba(255,255,255,.08);padding:10px;text-align:left}
+    .table th{color:var(--muted);font-weight:500}
+
+    /* contact */
+    .contact{display:grid;grid-template-columns:1fr;gap:20px}
+    @media (min-width:900px){.contact{grid-template-columns:1fr 1fr}}
+
+    footer{color:var(--muted);border-top:1px solid rgba(255,255,255,.08);padding:32px 0}
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a href="#" class="brand" aria-label="홈">
+        <img src="img/mainlogo.png" alt="Julabo Korea 로고" />
+        <span>Julabo Korea</span>
+      </a>
+      <div class="nav-links" role="navigation" aria-label="주요 메뉴">
+        <a href="#products">제품</a>
+        <a href="#references">레퍼런스</a>
+        <a href="#contact">문의</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="container hero-wrap">
+      <div>
+        <h1>항온 순환 수조부터 반응기까지<br>가장 빠른 제품 탐색</h1>
+        <p>필터와 검색으로 원하는 사양을 즉시 찾고, 최대 3개까지 비교하세요. 브랜드 공식 페이지로 1클릭 이동.</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="#products">제품 둘러보기</a>
+          <a class="btn btn-ghost" href="#contact">상담 요청</a>
+        </div>
+        <div class="finder" role="search" aria-label="제품 빠른 찾기">
+          <div class="row">
+            <input type="search" id="q" placeholder="제품명, 키워드(예: chiller, water bath, 20kW)" autocomplete="off" />
+            <div class="chips" id="chips" role="group" aria-label="카테고리 필터">
+              <button class="chip" data-filter="all" aria-pressed="true">전체</button>
+              <button class="chip" data-filter="circulator">Circulator</button>
+              <button class="chip" data-filter="chiller">Chiller</button>
+              <button class="chip" data-filter="bath">Water Bath</button>
+              <button class="chip" data-filter="reactor">Reactor</button>
+              <button class="chip" data-filter="accessory">Accessory</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <img src="img/back.jpg" alt="제품 히어로 이미지" />
+      </div>
+    </div>
+  </header>
+
+  <main id="products" class="container" style="padding:36px 0 18px">
+    <section aria-labelledby="p1" class="reveal">
+      <h2 id="p1" style="margin:0 0 10px">JULABO</h2>
+      <div class="brands" style="margin:10px 0 18px">
+        <a href="https://www.julabo.com/en/" target="_blank" rel="noreferrer noopener" aria-label="JULABO 공식 사이트"><img src="img/logo.png" alt="JULABO" /></a>
+        <a href="https://www.buchiglas.com/" target="_blank" rel="noreferrer noopener" aria-label="Buchi Glas 공식 사이트"><img src="img/logo2.png" alt="Buchi Glas" /></a>
+        <a href="https://www.hws-mainz.de" target="_blank" rel="noreferrer noopener" aria-label="HWS Mainz 공식 사이트"><img src="img/logo3.png" alt="HWS Mainz" /></a>
+      </div>
+
+      <div class="grid" id="grid">
+        <!-- JULABO cards -->
+        <article class="col-3 card" data-cat="circulator" data-brand="julabo" data-name="저온/고온 Circulator" data-temp="-95~200" data-link="https://www.julabo.com/en/products/refrigerated-circulators">
+          <img src="img/julabo/0.jpg" alt="저온/고온 Circulator" />
+          <div class="body">
+            <h3>저온 / 고온 Circulator <span class="tag">기본</span></h3>
+            <div class="meta">온도: -95℃ ~ +200℃ · 외부/내부 제어 · USB 원격</div>
+            <div class="tags"><span class="tag">±0.01℃</span><span class="tag">프로그램 1×10/6×60</span></div>
+          </div>
+          <div class="foot">
+            <a class="btn btn-link" target="_blank" rel="noreferrer noopener" href="https://www.julabo.com/en/products/refrigerated-circulators">상세 보기</a>
+            <button class="btn btn-compare" data-compare>비교</button>
+          </div>
+        </article>
+
+        <article class="col-3 card" data-cat="circulator" data-brand="julabo" data-name="Immersion Circulator" data-temp="20~300" data-link="https://www.julabo.com/en/products/heating-circulators">
+          <img src="img/julabo/1.jpg" alt="Immersion Circulator" />
+          <div class="body">
+            <h3>Immersion Circulator</h3>
+            <div class="meta">+20℃ ~ +300℃ · 최대 50L · 고내구성</div>
+            <div class="tags"><span class="tag">±0.01℃</span><span class="tag">강력 펌프</span></div>
+          </div>
+          <div class="foot">
+            <a class="btn btn-link" target="_blank" rel="noreferrer noopener" href="https://www.julabo.com/en/products/heating-circulators">상세 보기</a>
+            <button class="btn btn-compare" data-compare>비교</button>
+          </div>
+        </article>
+
+        <article class="col-3 card" data-cat="circulator" data-brand="julabo" data-name="급속 냉각/가열 Circulator" data-temp="-95~250" data-link="https://www.julabo.com/en/products/highly-dynamic-temperature-control-systems">
+          <img src="img/julabo/2.jpg" alt="급속 냉각/가열 Circulator" />
+          <div class="body">
+            <h3>급속 냉각 / 가열 Circulator <span class="tag">고성능</span></h3>
+            <div class="meta">-95℃ ~ +250℃ · 마그네틱 펌프 · 고출력</div>
+            <div class="tags"><span class="tag">넓은 범위</span><span class="tag">보정 빠름</span></div>
+          </div>
+          <div class="foot">
+            <a class="btn btn-link" target="_blank" rel="noreferrer noopener" href="https://www.julabo.com/en/products/highly-dynamic-temperature-control-systems">상세 보기</a>
+            <button class="btn btn-compare" data-compare>비교</button>
+          </div>
+        </article>
+
+        <article class="col-3 card" data-cat="chiller" data-brand="julabo" data-name="Chiller" data-temp="-25~130" data-link="https://www.julabo.com/en/products/recirculating-coolers">
+          <img src="img/julabo/3.jpg" alt="Chiller" />
+          <div class="body">
+            <h3>Chiller</h3>
+            <div class="meta">-25℃ ~ +130℃ · 친환경 · 강력 순환펌프</div>
+            <div class="tags"><span class="tag">물/글리콜</span><span class="tag">최대 20kW</span></div>
+          </div>
+          <div class="foot">
+            <a class="btn btn-link" target="_blank" rel="noreferrer noopener" href="https://www.julabo.com/en/products/recirculating-coolers">상세 보기</a>
+            <button class="btn btn-compare" data-compare>비교</button>
+          </div>
+        </article>
+
+        <!-- Baths -->
+        <article class="col-3 card" data-cat="bath" data-brand="julabo" data-name="Water baths" data-temp="" data-link="https://www.julabo.com/en/products/water-baths">
+          <img src="img/julabo/4.jpg" alt="Water baths" />
+          <div class="body">
+            <h3>Water baths</h3>
+            <div class="meta">고품질 수조 · 생활방수 키패드 · 타이머</div>
+            <div class="tags"><span class="tag">LED 표시</span></div>
+          </div>
+          <div class="foot">
+            <a class="btn btn-link" target="_blank" rel="noreferrer noopener" href="https://www.julabo.com/en/products/water-baths">상세 보기</a>
+            <button class="btn btn-compare" data-compare>비교</button>
+          </div>
+        </article>
+
+        <article class="col-3 card" data-cat="bath" data-brand="julabo" data-name="Shaking water baths" data-temp="" data-link="https://www.julabo.com/en/products/shaking-water-baths">
+          <img src="img/julabo/5.jpg" alt="Shaking water baths" />
+          <div class="body">
+            <h3>Shaking water baths</h3>
+            <div class="meta">생활 방수 · 20–200 RPM · 특허 Foil keypad</div>
+          </div>
+          <div class="foot">
+            <a class="btn btn-link" target="_blank" rel="noreferrer noopener" href="https://www.julabo.com/en/products/shaking-water-baths">상세 보기</a>
+            <button class="btn btn-compare" data-compare>비교</button>
+          </div>
+        </article>
+
+        <article class="col-3 card" data-cat="accessory" data-brand="julabo" data-name="Special Applications" data-temp="" data-link="https://www.julabo.com/en/products/products-special-applications">
+          <img src="img/julabo/6.jpg" alt="Special Applications" />
+          <div class="body">
+            <h3>Special Applications</h3>
+            <div class="meta">맥주 숙성 순환기 · 침수 냉각기 등</div>
+          </div>
+          <div class="foot">
+            <a class="btn btn-link" target="_blank" rel="noreferrer noopener" href="https://www.julabo.com/en/products/products-special-applications">상세 보기</a>
+            <button class="btn btn-compare" data-compare>비교</button>
+          </div>
+        </article>
+
+        <article class="col-3 card" data-cat="accessory" data-brand="julabo" data-name="액세서리" data-temp="" data-link="https://www.julabo.com/en/products/accessories">
+          <img src="img/julabo/7.jpg" alt="JULABO 액세서리" />
+          <div class="body">
+            <h3>액세서리</h3>
+            <div class="meta">아답터 · 배관 · 수조 유체 · 인증서</div>
+          </div>
+          <div class="foot">
+            <a class="btn btn-link" target="_blank" rel="noreferrer noopener" href="https://www.julabo.com/en/products/accessories">상세 보기</a>
+            <button class="btn btn-compare" data-compare>비교</button>
+          </div>
+        </article>
+
+        <!-- Buchi Glas / Reactors -->
+        <article class="col-3 card" data-cat="reactor" data-brand="buchi" data-name="Uniclave" data-press="-1~+60 bar" data-temp="-20~+250" data-link="https://www.buchiglas.com/en/products/pressure-reactors-stirred-autoclaves/lab-and-pilot-pressure-reactors-025-500-liter/uniclave.html">
+          <img src="img/buechi/0.jpg" alt="Uniclave 소형 압력반응기" />
+          <div class="body">
+            <h3>Uniclave <span class="tag">소형</span></h3>
+            <div class="meta">0.5–1.0 L · -20–250℃ · +60 bar</div>
+          </div>
+          <div class="foot">
+            <a class="btn btn-link" target="_blank" rel="noreferrer noopener" href="https://www.buchiglas.com/en/products/pressure-reactors-stirred-autoclaves/lab-and-pilot-pressure-reactors-025-500-liter/uniclave.html">상세 보기</a>
+            <button class="btn btn-compare" data-compare>비교</button>
+          </div>
+        </article>
+
+        <article class="col-3 card" data-cat="reactor" data-brand="buchi" data-name="Polyclave" data-press="-1~+60/200 bar" data-temp="-20~+250" data-link="https://www.buchiglas.com/en/products/pressure-reactors-stirred-autoclaves/lab-and-pilot-pressure-reactors-025-500-liter/polyclave.html">
+          <img src="img/buechi/1.jpg" alt="Polyclave 다목적 압력반응기" />
+          <div class="body">
+            <h3>Polyclave <span class="tag">다목적</span></h3>
+            <div class="meta">0.25–5.0 L · -20–250℃ · +60/200 bar</div>
+          </div>
+          <div class="foot">
+            <a class="btn btn-link" target="_blank" rel="noreferrer noopener" href="https://www.buchiglas.com/en/products/pressure-reactors-stirred-autoclaves/lab-and-pilot-pressure-reactors-025-500-liter/polyclave.html">상세 보기</a>
+            <button class="btn btn-compare" data-compare>비교</button>
+          </div>
+        </article>
+
+        <article class="col-3 card" data-cat="reactor" data-brand="buchi" data-name="Kiloclave" data-press="-1~+60 bar" data-temp="-20~+250" data-link="https://www.buchiglas.com/en/products/pressure-reactors-stirred-autoclaves/lab-and-pilot-pressure-reactors-025-500-liter/kiloclave.html">
+          <img src="img/buechi/2.jpg" alt="Kiloclave 소량 생산 압력반응기" />
+          <div class="body">
+            <h3>Kiloclave <span class="tag">소량 생산</span></h3>
+            <div class="meta">0.5–20.0 L · -20–250℃ · +60 bar</div>
+          </div>
+          <div class="foot">
+            <a class="btn btn-link" target="_blank" rel="noreferrer noopener" href="https://www.buchiglas.com/en/products/pressure-reactors-stirred-autoclaves/lab-and-pilot-pressure-reactors-025-500-liter/kiloclave.html">상세 보기</a>
+            <button class="btn btn-compare" data-compare>비교</button>
+          </div>
+        </article>
+
+        <article class="col-3 card" data-cat="reactor" data-brand="buchi" data-name="Pilotclave" data-press="-1~+200 bar" data-temp="-20~+300" data-link="https://www.buchiglas.com/en/products/pressure-reactors-stirred-autoclaves/lab-and-pilot-pressure-reactors-025-500-liter/pilotclave.html">
+          <img src="img/buechi/3.jpg" alt="Pilotclave 대량 생산 공정 압력반응기" />
+          <div class="body">
+            <h3>Pilotclave <span class="tag">대량 공정</span></h3>
+            <div class="meta">20–500 L · -20–300℃ · +200 bar</div>
+          </div>
+          <div class="foot">
+            <a class="btn btn-link" target="_blank" rel="noreferrer noopener" href="https://www.buchiglas.com/en/products/pressure-reactors-stirred-autoclaves/lab-and-pilot-pressure-reactors-025-500-liter/pilotclave.html">상세 보기</a>
+            <button class="btn btn-compare" data-compare>비교</button>
+          </div>
+        </article>
+
+        <article class="col-3 card" data-cat="reactor" data-brand="buchi" data-name="Midiclave" data-press="-1~+200 bar" data-temp="-20~+250" data-link="https://www.buchiglas.com/en/products/pressure-reactors-stirred-autoclaves/high-pressure-reactors-100ml-5-liter/midiclave.html">
+          <img src="img/buechi/4.jpg" alt="Midiclave 초고온/초고압 압력반응기" />
+          <div class="body">
+            <h3>Midiclave <span class="tag">초고온·초고압</span></h3>
+            <div class="meta">0.1–1.0 L · -20–250℃ · +200 bar</div>
+          </div>
+          <div class="foot">
+            <a class="btn btn-link" target="_blank" rel="noreferrer noopener" href="https://www.buchiglas.com/en/products/pressure-reactors-stirred-autoclaves/high-pressure-reactors-100ml-5-liter/midiclave.html">상세 보기</a>
+            <button class="btn btn-compare" data-compare>비교</button>
+          </div>
+        </article>
+
+        <article class="col-3 card" data-cat="reactor" data-brand="buchi" data-name="bpc2 Hydrogenator" data-press="0.5~140 bar" data-temp="" data-link="https://www.buchiglas.com/en/products/pressure-reactors-stirred-autoclaves/hydrogenation-systems/bpc-2-hydrogenator-turn-key-solution.html">
+          <img src="img/buechi/5.jpg" alt="bpc2 Hydrogenator 수소화 반응 시스템" />
+          <div class="body">
+            <h3>bpc2 Hydrogenator <span class="tag">수소화</span></h3>
+            <div class="meta">0.5–140 bar · Flow 0–225 Ln/min · Accuracy > 99%</div>
+          </div>
+          <div class="foot">
+            <a class="btn btn-link" target="_blank" rel="noreferrer noopener" href="https://www.buchiglas.com/en/products/pressure-reactors-stirred-autoclaves/hydrogenation-systems/bpc-2-hydrogenator-turn-key-solution.html">상세 보기</a>
+            <button class="btn btn-compare" data-compare>비교</button>
+          </div>
+        </article>
+
+        <!-- HWS Mainz (examples) -->
+        <article class="col-3 card" data-cat="reactor" data-brand="hws" data-name="Flat flange vessel" data-press="" data-temp="" data-link="https://www.hws-mainz.de/en/product/hws-flat-flange-vessels-type-adav-cylindrical-jacketed-with-bottom-outlet-valve/">
+          <img src="img/hws/0.jpg" alt="HWS Flat flange vessel" />
+          <div class="body">
+            <h3>Flat flange vessel</h3>
+            <div class="meta">재킷, 바텀 아울렛 밸브 옵션</div>
+          </div>
+          <div class="foot">
+            <a class="btn btn-link" target="_blank" rel="noreferrer noopener" href="https://www.hws-mainz.de/en/product/hws-flat-flange-vessels-type-adav-cylindrical-jacketed-with-bottom-outlet-valve/">상세 보기</a>
+            <button class="btn btn-compare" data-compare>비교</button>
+          </div>
+        </article>
+
+        <article class="col-3 card" data-cat="reactor" data-brand="hws" data-name="Outlet valves" data-press="" data-temp="" data-link="https://www.hws-mainz.de/en/product/hws-bottom-outlet-valves/">
+          <img src="img/hws/1.jpg" alt="HWS Outlet valves" />
+          <div class="body">
+            <h3>Outlet valves</h3>
+            <div class="meta">바텀 아울렛 밸브</div>
+          </div>
+          <div class="foot">
+            <a class="btn btn-link" target="_blank" rel="noreferrer noopener" href="https://www.hws-mainz.de/en/product/hws-bottom-outlet-valves/">상세 보기</a>
+            <button class="btn btn-compare" data-compare>비교</button>
+          </div>
+        </article>
+
+        <article class="col-3 card" data-cat="reactor" data-brand="hws" data-name="Ceramic mechanical seal" data-press="" data-temp="" data-link="https://www.hws-mainz.de/en/product/hws-ceramic-mechanical-seal/">
+          <img src="img/hws/2.jpg" alt="HWS Ceramic mechanical seal" />
+          <div class="body">
+            <h3>Ceramic mechanical seal</h3>
+            <div class="meta">세라믹 메카니컬 씰</div>
+          </div>
+          <div class="foot">
+            <a class="btn btn-link" target="_blank" rel="noreferrer noopener" href="https://www.hws-mainz.de/en/product/hws-ceramic-mechanical-seal/">상세 보기</a>
+            <button class="btn btn-compare" data-compare>비교</button>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <!-- Compare tray -->
+  <div class="tray" id="tray" aria-live="polite">
+    <div class="tray-inner">
+      <div class="chips" id="tray-items"></div>
+      <div style="display:flex; gap:8px">
+        <button class="btn btn-ghost" id="clear">초기화</button>
+        <button class="btn btn-primary" id="openCompare">비교하기</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="overlay" id="overlay"></div>
+  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="cmp-title" aria-describedby="cmp-desc">
+    <header>
+      <strong id="cmp-title">제품 비교</strong>
+      <button class="btn btn-ghost" id="closeModal" aria-label="비교 닫기">닫기</button>
+    </header>
+    <div class="content">
+      <p id="cmp-desc" class="meta">선택한 제품의 핵심 사양을 나란히 비교합니다.</p>
+      <div class="table-wrap" style="overflow:auto">
+        <table class="table" id="cmp-table">
+          <thead>
+            <tr><th>항목</th></tr>
+          </thead>
+          <tbody>
+            <tr><th>제품명</th></tr>
+            <tr><th>브랜드</th></tr>
+            <tr><th>온도 범위</th></tr>
+            <tr><th>압력(해당시)</th></tr>
+            <tr><th>링크</th></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <section id="references" class="container" style="padding:30px 0 10px">
+    <h2 style="margin:0 0 8px">레퍼런스</h2>
+    <p class="meta">국내 연구소 및 제조 현장에서 다양한 성공 사례를 보유하고 있습니다. 필요 시 상세 사례 자료를 제공해 드립니다.</p>
+  </section>
+
+  <section id="contact" class="container contact" style="padding:20px 0 50px">
+    <div>
+      <img src="img/map.jpg" alt="회사 위치 지도" style="width:100%;border-radius:var(--radius);border:1px solid rgba(255,255,255,.12)" />
+    </div>
+    <div>
+      <h2 style="margin:0 0 12px">문의</h2>
+      <p class="meta">전화 02-6277-3700 · 팩스 02-6277-3701 · 이메일 <a href="mailto:info@julabo-korea.co.kr">info@julabo-korea.co.kr</a></p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+        <input placeholder="성함" style="padding:12px 14px;border-radius:12px;border:1px solid rgba(255,255,255,.14);background:#0f1419;color:var(--text)" />
+        <input placeholder="연락처" style="padding:12px 14px;border-radius:12px;border:1px solid rgba(255,255,255,.14);background:#0f1419;color:var(--text)" />
+        <input placeholder="이메일" style="padding:12px 14px;border-radius:12px;border:1px solid rgba(255,255,255,.14);background:#0f1419;color:var(--text)" />
+        <select style="padding:12px 14px;border-radius:12px;border:1px solid rgba(255,255,255,.14);background:#0f1419;color:var(--text)">
+          <option>관심 제품 분류</option>
+          <option>Circulator</option>
+          <option>Chiller</option>
+          <option>Water Bath</option>
+          <option>Reactor</option>
+          <option>Accessory</option>
+        </select>
+        <textarea placeholder="요청/문의 내용" rows="5" style="grid-column:1/-1;padding:12px 14px;border-radius:12px;border:1px solid rgba(255,255,255,.14);background:#0f1419;color:var(--text)"></textarea>
+        <button class="btn btn-primary" style="grid-column:1/-1;justify-content:center">문의 보내기</button>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container" style="text-align:center">
+      <img src="img/mainlogo.png" alt="Julabo Korea 로고" style="height:36px;opacity:.8" />
+      <p style="margin:.5rem 0 0">상호 : (주)줄라보코리아 | 대표자 : 성주호</p>
+      <p style="margin:.25rem 0 0">사업자등록번호 : 138-81-25872 | 소재지 : 서울 금천구 가산디지털2로 108 뉴티캐슬 407호</p>
+      <p style="margin:.25rem 0 0">Copyright © 2025 JULABO Korea Inc. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Reveal on scroll
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in')}});
+    },{threshold:.12});
+    document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+    // Finder filtering
+    const search = document.getElementById('q');
+    const chips = document.getElementById('chips');
+    const cards = [...document.querySelectorAll('.card')];
+    let active = 'all';
+    function applyFilter(){
+      const q = (search.value||'').toLowerCase();
+      cards.forEach(c=>{
+        const matchCat = active==='all' || c.dataset.cat===active;
+        const hay = `${c.dataset.name} ${c.querySelector('.meta')?.textContent||''}`.toLowerCase();
+        const matchText = !q || hay.includes(q);
+        c.style.display = (matchCat && matchText)?'flex':'none';
+      });
+    }
+    search.addEventListener('input', applyFilter);
+    chips.addEventListener('click', e=>{
+      const b = e.target.closest('.chip');
+      if(!b) return;
+      chips.querySelectorAll('.chip').forEach(x=>x.setAttribute('aria-pressed','false'));
+      b.setAttribute('aria-pressed','true');
+      active = b.dataset.filter;
+      applyFilter();
+    });
+
+    // Compare feature (max 3)
+    const tray = document.getElementById('tray');
+    const trayItems = document.getElementById('tray-items');
+    const selected = new Map();
+
+    function renderTray(){
+      trayItems.innerHTML = '';
+      selected.forEach((v,k)=>{
+        const pill = document.createElement('span');
+        pill.className='pill';
+        pill.textContent=v.name;
+        pill.title=v.brand;
+        trayItems.appendChild(pill);
+      });
+      tray.style.display = selected.size? 'block':'none';
+    }
+
+    document.getElementById('clear').addEventListener('click', ()=>{selected.clear();renderTray();});
+
+    document.getElementById('openCompare').addEventListener('click', ()=>{
+      const overlay = document.getElementById('overlay');
+      const modal = document.getElementById('modal');
+      const table = document.getElementById('cmp-table');
+      // clear old columns
+      [...table.querySelectorAll('th:not(:first-child), td:not(:first-child)')].forEach(n=>n.remove());
+      // build columns
+      selected.forEach((v)=>{
+        const add = (sel, html)=>{const row = table.querySelector(sel); const cell = document.createElement(sel.startsWith('thead')?'th':'td'); cell.innerHTML = html; row.appendChild(cell)};
+        add('thead tr', `<span class="tag">${v.cat}</span>`);
+        add('tbody tr:nth-child(1)', v.name);
+        add('tbody tr:nth-child(2)', v.brand.toUpperCase());
+        add('tbody tr:nth-child(3)', v.temp||'-');
+        add('tbody tr:nth-child(4)', v.press||'-');
+        add('tbody tr:nth-child(5)', `<a href="${v.link}" target="_blank" rel="noreferrer noopener">공식 페이지</a>`);
+      });
+      overlay.classList.add('open');
+      modal.classList.add('open');
+    });
+    document.getElementById('closeModal').addEventListener('click', ()=>{
+      overlay.classList.remove('open');
+      modal.classList.remove('open');
+    });
+    document.getElementById('overlay').addEventListener('click', ()=>{
+      overlay.classList.remove('open');
+      modal.classList.remove('open');
+    });
+
+    // attach compare buttons
+    document.getElementById('grid').addEventListener('click', (e)=>{
+      const btn = e.target.closest('[data-compare]');
+      if(!btn) return;
+      const card = e.target.closest('.card');
+      const id = card.dataset.name + card.dataset.brand;
+      if(selected.has(id)){
+        selected.delete(id);
+      } else {
+        if(selected.size>=3){
+          alert('비교는 최대 3개까지 선택 가능합니다.');
+          return;
+        }
+        selected.set(id, {
+          name: card.dataset.name,
+          brand: card.dataset.brand,
+          temp: card.dataset.temp||'',
+          press: card.dataset.press||'',
+          link: card.dataset.link||'#',
+          cat: card.dataset.cat
+        });
+      }
+      renderTray();
+    });
+  </script>
+</body>
+</html>
